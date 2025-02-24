@@ -8,8 +8,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#3498db",
+        secondary: "#BE123C",
+      },
+      fontFamily: {
+        itim: ["Itim", "cursive"],
+        montserrat: ["Montserrat", "sans-serif"],
+        custom: ["Arial", "sans-serif"], // Change cette police si nécessaire
       },
     },
   },
