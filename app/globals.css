@@ -1,26 +1,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&family=Montserrat:wght@400;700&display=swap');
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+@import 'swiper/css/effect-fade';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light Theme */
+    --background: 255 255 255;
+    --foreground: 10 36 99;
+    --primary: 10 36 99;
+    --primary-foreground: 251 251 251;
+    --secondary: 251 54 64;
+    --secondary-foreground: 255 255 255;
+    --border: 229 231 235;
+    --input: 229 231 235;
+    --destructive: 185 28 28;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Theme */
+    --background: 10 10 15;
+    --foreground: 248 249 250;
+    --primary: 79 131 209;
+    --primary-foreground: 10 10 15;
+    --secondary: 200 35 44;
+    --secondary-foreground: 255 255 255;
+    --border: 55 65 81;
+    --input: 55 65 81;
+    --destructive: 127 29 29;
+  }
+
+  * {
+    @apply border-border;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  ::selection {
+    background-color: rgb(var(--secondary));
+    color: rgb(var(--secondary-foreground));
+  }
+
+  .dark ::selection {
+    background-color: rgb(var(--primary));
+    color: rgb(var(--primary-foreground));
   }
 }
 
+@layer components {
+  /* Styles Swiper optimisés */
+  .swiper {
+    @apply h-full w-full;
+  }
+
+  .swiper-wrapper {
+    @apply !h-full items-stretch;
+  }
+
+  .swiper-slide {
+    @apply !h-auto !flex items-stretch;
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-gray-300/50 dark:bg-gray-600/50 w-2 h-2 transition-all duration-300;
+  }
+
+  .swiper-pagination-bullet-active {
+    @apply !w-4 !bg-secondary dark:!bg-primary rounded-full scale-125;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm rounded-full p-2 
+           w-10 h-10 hover:bg-white/20 dark:hover:bg-gray-800/50
+           after:text-lg after:font-bold after:text-gray-800 dark:after:text-gray-200
+           transition-opacity duration-300 shadow-lg;
+  }
+
+  /* Conteneur image plein écran */
+  .image-container-full {
+    @apply relative w-full h-full min-h-[250px];
+  }
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply hidden;
+  }
+  
+  .swiper-pagination-bullet {
+    @apply w-1.5 h-1.5;
+  }
+
+  .swiper-pagination-bullet-active {
+    @apply !w-3;
+  }
+}
+
+/* Correction dark mode */
+.dark {
+  .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+    @apply bg-gray-600/50;
+  }
+}
+
+/* Optimisation Next.js Image */
+.next-image-wrapper > span {
+  @apply h-full w-full !important;
+}
 
 
+@keyframes gradient-xy {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.6;
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif, 'custom';
+.animate-gradient-xy {
+  background-size: 400% 400%;
+  animation: gradient-xy 20s ease infinite;
 }
