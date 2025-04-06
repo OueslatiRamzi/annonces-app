@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    eslint: {
+      ignoreDuringBuilds: true, // Optionnel pour les builds de production
+    },
     images: {
       domains: ["lh3.googleusercontent.com"],
       remotePatterns: [

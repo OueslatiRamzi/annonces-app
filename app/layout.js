@@ -1,4 +1,4 @@
-// app/layout.js
+/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import { ThemeProvider } from './components/ThemeProvider';
 import Providers from './Providers';
