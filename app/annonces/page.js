@@ -1,4 +1,3 @@
-// app/annonces/page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -49,7 +48,7 @@ export default function AnnoncesPage() {
         const res = await fetch("/api/auth/me");
         const data = await res.json();
         setUser(data.user || null);
-      } catch (err) {
+      } catch { // <-- Removed unused 'err' parameter
         setUser(null);
       }
     };

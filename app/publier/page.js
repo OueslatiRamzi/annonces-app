@@ -31,7 +31,7 @@ export default function PublierPage() {
           >
             <FaSpinner className="text-3xl text-primary dark:text-secondary animate-spin" />
           </motion.div>
-          <p className="text-gray-600 dark:text-gray-400">Vérification de l'authentification...</p>
+          <p className="text-gray-600 dark:text-gray-400">Vérification de l&apos;authentification...</p>
         </div>
       </motion.div>
     );
@@ -67,9 +67,9 @@ export default function PublierPage() {
         </div>
 
         <div className="p-6 sm:p-8 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-            Votre annonce sera vérifiée avant publication. Les champs marqués d'un * sont obligatoires.
-          </p>
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+          Votre annonce sera vérifiée avant publication. Les champs marqués d&apos;un * sont obligatoires.
+        </p>
         </div>
       </div>
     </motion.div>

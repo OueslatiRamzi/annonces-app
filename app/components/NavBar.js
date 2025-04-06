@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 
 export default function Navbar() {
   const router = useRouter();
@@ -95,10 +96,12 @@ export default function Navbar() {
 
             {session?.user ? (
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src={session.user.image || "/default-avatar.png"}
-                  alt="Profil"
-                  className="w-8 h-8 rounded-full object-cover border border-gray-300 dark:border-gray-600 shadow-sm"
+                  alt="Photo de profil"
+                  width={32}
+                  height={32}
+                  className="rounded-full object-cover border border-gray-300 dark:border-gray-600 shadow-sm"
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">
                   {session.user.name}
@@ -150,11 +153,13 @@ export default function Navbar() {
               {session?.user ? (
                 <>
                   <div className="flex items-center gap-2 mb-2">
-                    <img
-                      src={session.user.image || "/default-avatar.png"}
-                      alt="Avatar"
-                      className="w-8 h-8 rounded-full object-cover border border-gray-300 dark:border-gray-600"
-                    />
+                  <Image
+                    src={session.user.image || "/default-avatar.png"}
+                    alt="Photo de profil"
+                    width={32}
+                    height={32}
+                    className="rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                  />
                     <span className="text-sm">{session.user.name}</span>
                   </div>
                   <button

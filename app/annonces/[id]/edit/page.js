@@ -135,7 +135,7 @@ export default function EditAnnoncePage() {
 
   return (
     <section className="container mx-auto p-6 max-w-2xl">
-  <h1 className="text-3xl font-bold text-primary mb-6">Modifier l'annonce</h1>
+  <h1 className="text-3xl font-bold text-primary mb-6">Modifier l&apos;annonce</h1>
   
   <form onSubmit={handleSubmit} className="space-y-6">
     {error && <div className="text-red-500 p-3 bg-red-50 rounded-lg">{error}</div>}
@@ -183,7 +183,7 @@ export default function EditAnnoncePage() {
 
     {/* Nom de l'annonce */}
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">Nom de l'annonce *</label>
+    <label className="block text-sm font-medium text-gray-700">Nom de l&apos;annonce *</label>
       <Input
         value={annonce.nom}
         onChange={(e) => setAnnonce({ ...annonce, nom: e.target.value })}

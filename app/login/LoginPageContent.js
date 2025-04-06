@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { FaGoogle, FaExclamationTriangle, FaArrowLeft, FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Link from "next/link"; 
 
 export default function LoginPageContent() {
   const searchParams = useSearchParams();
@@ -16,12 +17,12 @@ export default function LoginPageContent() {
         className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6 border border-gray-100 dark:border-gray-700"
       >
         <div className="text-center space-y-2">
-          <a
+          <Link
             href="/"
             className="inline-block text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-secondary mb-4"
           >
-            <FaArrowLeft className="inline mr-2" /> Retour à l'accueil
-          </a>
+            <FaArrowLeft className="inline mr-2" /> Retour à l&apos;accueil
+          </Link>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Connectez-vous
           </h1>
@@ -61,7 +62,7 @@ export default function LoginPageContent() {
               <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">Plus d'options prochainement</span>
+              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">Plus d&apos;options prochainement</span>
             </div>
           </div>
 
@@ -80,13 +81,13 @@ export default function LoginPageContent() {
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400">
           En vous connectant, vous acceptez nos{" "}
-          <a href="/privacy" className="text-primary dark:text-secondary hover:underline">
-            Conditions d'utilisation
-          </a>{" "}
+          <Link href="/privacy" className="text-primary dark:text-secondary hover:underline">
+            Conditions d&apos;utilisation
+          </Link>{" "}
           et{" "}
-          <a href="/terms" className="text-primary dark:text-secondary hover:underline">
+          <Link href="/terms" className="text-primary dark:text-secondary hover:underline">
             Politique de confidentialité
-          </a>
+          </Link>
         </p>
       </motion.div>
     </div>

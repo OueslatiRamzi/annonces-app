@@ -113,7 +113,7 @@ export default function MesAnnoncesPage() {
         {annonces.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Vous n'avez aucune annonce active pour le moment.
+              Vous n&apos;avez aucune annonce active pour le moment.
             </p>
             <button
               onClick={() => router.push("/publier")}

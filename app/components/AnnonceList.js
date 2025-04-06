@@ -1,9 +1,20 @@
 "use client";
 
+import PropTypes from 'prop-types';
 import AnnonceCard from "./AnnonceCard";
-import { FaSpinner, FaExclamationTriangle, FaSearch } from "react-icons/fa";
+import { FaExclamationTriangle, FaSearch } from "react-icons/fa"; // Retiré FaSpinner inutilisé
 import { motion } from "framer-motion";
 
+AnnonceList.propTypes = {
+  annonces: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      // Ajoutez les autres propriétés nécessaires ici
+    })
+  ).isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
 export default function AnnonceList({ annonces, loading, error }) {
   return (
     <section className="space-y-8">

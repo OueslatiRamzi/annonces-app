@@ -1,4 +1,5 @@
 // app/layout.js
+import PropTypes from 'prop-types';
 import { ThemeProvider } from './components/ThemeProvider';
 import Providers from './Providers';
 import NavBar from "./components/NavBar";
@@ -35,3 +36,7 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+RootLayout.propTypes = {
+  children: PropTypes.node.isRequired
+};

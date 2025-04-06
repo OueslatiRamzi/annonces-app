@@ -5,9 +5,10 @@ import * as yup from "yup";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { FaTag, FaMapMarkerAlt, FaPhone, FaEuroSign, FaUser, FaImage, FaCheck, FaSpinner, FaTimes } from "react-icons/fa";
+import { FaTag, FaMapMarkerAlt, FaPhone, FaEuroSign, FaUser, FaCheck, FaSpinner, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import PropTypes from 'prop-types';
 
 const schema = yup.object().shape({
   nom: yup.string().min(4, "Le nom doit contenir au moins 4 caractères").required(),
@@ -175,7 +176,7 @@ export default function AnnonceForm() {
             <div>
               <label className="flex items-center gap-2 mb-2 font-medium text-gray-700 dark:text-gray-300">
                 <FaUser className="text-secondary dark:text-primary" />
-                Nom de l'annonce
+                Nom de l&apos;annonce
               </label>
               <input
                 {...register("nom")}
@@ -270,7 +271,7 @@ export default function AnnonceForm() {
                 <FaSpinner className="animate-spin" />
                 Publication en cours...
               </div>
-            ) : "Publier l'annonce"}
+            ) : "Publier l&apos;annonce"}
           </motion.button>
         </form>
       </motion.div>
@@ -329,3 +330,7 @@ const FormError = ({ message }) => (
     {message && <span className="text-xs">⚠</span>} {message}
   </p>
 );
+
+FormError.propTypes = {
+  message: PropTypes.string
+};

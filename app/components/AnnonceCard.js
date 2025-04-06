@@ -1,12 +1,33 @@
 "use client";
 
+import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { FaTag, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { FaTag, FaMapMarkerAlt } from "react-icons/fa"; // Retiré FaPhone inutilisé
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
+
+AnnonceCard.propTypes = {
+  annonce: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    nom: PropTypes.string.isRequired,
+    prix: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    emplacement: PropTypes.string.isRequired,
+    imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+    categorie: PropTypes.shape({
+      nom: PropTypes.string
+    }),
+    user: PropTypes.shape({
+      name: PropTypes.string,
+      image: PropTypes.string
+    })
+  }).isRequired
+};
+
 
 export default function AnnonceCard({ annonce }) {
   const router = useRouter();

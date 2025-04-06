@@ -1,8 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../[...nextauth]/route";
-import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
- 
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -22,7 +21,7 @@ export async function GET() {
       }
     });
 
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Erreur serveur" },
       { status: 500 }
