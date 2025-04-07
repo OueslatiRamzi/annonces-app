@@ -4,13 +4,16 @@ const nextConfig = {
       ignoreDuringBuilds: true, // Optionnel pour les builds de production
     },
     images: {
-      domains: ["lh3.googleusercontent.com"],
       remotePatterns: [
         {
           protocol: 'https',
           hostname: 'res.cloudinary.com',
           port: '',
           pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: '**.googleusercontent.com', // Exemple pour Google Auth
         },
         // Ajoutez d'autres domaines si nécessaire
       ],
