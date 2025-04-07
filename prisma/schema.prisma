@@ -13,8 +13,8 @@ model User {
   email         String?   @unique
   image         String?
   emailVerified DateTime?
-  annonces      Annonce[]
   accounts      Account[]
+  annonces      Annonce[]
   sessions      Session[]
 }
 
@@ -45,24 +45,24 @@ model Session {
 }
 
 model Annonce {
-  id          Int       @id @default(autoincrement())
   nom         String
-  prix        Int
   description String
-  categorieId Int
-  categorie   Categorie @relation(fields: [categorieId], references: [id], onDelete: Cascade)
-  telephone   String
-  emplacement String
-  imageUrls   String[]
   createdAt   DateTime  @default(now())
   userId      String
+  id          Int       @id @default(autoincrement())
+  prix        Int
+  emplacement String
+  imageUrls   String[]
+  telephone   String
+  categorieId Int
+  categorie   Categorie @relation(fields: [categorieId], references: [id], onDelete: Cascade)
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Categorie {
   id       Int       @id @default(autoincrement())
   nom      String
-  annonces Annonce[] // Ajout de la relation inverse
+  annonces Annonce[]
 }
 
 model VerificationToken {
