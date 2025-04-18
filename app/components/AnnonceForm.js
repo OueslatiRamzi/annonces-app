@@ -272,7 +272,7 @@ export default function AnnonceForm() {
                 <FaSpinner className="animate-spin" />
                 Publication en cours...
               </div>
-            ) : "Publier l&apos;annonce"}
+            ) : "Publier l'annonce"}
           </motion.button>
         </form>
       </motion.div>
