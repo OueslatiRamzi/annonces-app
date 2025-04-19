@@ -1,9 +1,0 @@
-{
-    "buildCommand": "npm run build",
-    "installCommand": "npm install",
-    "outputDirectory": ".next",
-    "commands": {
-      "postBuild": "npx prisma migrate deploy"
-    }
-  }
-  
