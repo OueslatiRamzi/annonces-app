@@ -1,24 +1,3 @@
-/*
-  Warnings:
-
-  - The primary key for the `Annonce` table will be changed. If it partially fails, the table could be left without primary key constraint.
-  - You are about to drop the column `imageUrl` on the `Annonce` table. All the data in the column will be lost.
-  - The `id` column on the `Annonce` table would be dropped and recreated. This will lead to data loss if there is data in the column.
-  - Added the required column `userId` to the `Annonce` table without a default value. This is not possible if the table is not empty.
-  - Changed the type of `prix` on the `Annonce` table. No cast exists, the column would be dropped and recreated, which cannot be done if there is data, since the column is required.
-
-*/
--- AlterTable
-ALTER TABLE "Annonce" DROP CONSTRAINT "Annonce_pkey",
-DROP COLUMN "imageUrl",
-ADD COLUMN     "image" TEXT,
-ADD COLUMN     "userId" TEXT NOT NULL,
-DROP COLUMN "id",
-ADD COLUMN     "id" SERIAL NOT NULL,
-DROP COLUMN "prix",
-ADD COLUMN     "prix" INTEGER NOT NULL,
-ADD CONSTRAINT "Annonce_pkey" PRIMARY KEY ("id");
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -58,6 +37,37 @@ CREATE TABLE "Session" (
     CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Annonce" (
+    "nom" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "prix" INTEGER NOT NULL,
+    "emplacement" TEXT NOT NULL,
+    "imageUrls" TEXT[],
+    "telephone" TEXT NOT NULL,
+    "categorieId" INTEGER NOT NULL,
+
+    CONSTRAINT "Annonce_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Categorie" (
+    "id" SERIAL NOT NULL,
+    "nom" TEXT NOT NULL,
+
+    CONSTRAINT "Categorie_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "VerificationToken" (
+    "identifier" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "expires" TIMESTAMP(3) NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -67,11 +77,20 @@ CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provi
 -- CreateIndex
 CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 
--- AddForeignKey
-ALTER TABLE "Annonce" ADD CONSTRAINT "Annonce_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Annonce" ADD CONSTRAINT "Annonce_categorieId_fkey" FOREIGN KEY ("categorieId") REFERENCES "Categorie"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Annonce" ADD CONSTRAINT "Annonce_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
