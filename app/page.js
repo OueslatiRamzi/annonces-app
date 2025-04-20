@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 "use client";
 
 import Link from "next/link";
@@ -15,7 +14,7 @@ export default function Home() {
     if (!session?.user) {
       e.preventDefault();
       router.push("/login");
-    }
+    } 
   };
 
   // Variantes d'animation améliorées

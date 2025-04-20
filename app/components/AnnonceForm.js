@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 "use client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,14 +18,14 @@ const schema = yup.object().shape({
   telephone: yup.string().matches(/^\d{8}$/, "Numéro invalide (8 chiffres)").required(),
   emplacement: yup.string().required("L’emplacement est obligatoire"),
   images: yup
-    .mixed()
-    .test("fileSize", "Chaque image doit être inférieure à 2MB", (value) =>
-      (Array.from(value || [])).every(file => file?.size <= 2 * 1024 * 1024)
-    )
-    .test("fileType", "Formats acceptés: JPEG, PNG", (value) =>
-      (Array.from(value || [])).every(file => ["image/jpeg", "image/png"].includes(file?.type))
-    )
-    .required("Les images sont obligatoires"),
+  .mixed()
+  .test("fileSize", "Chaque image doit être inférieure à 6MB", (value) =>
+    (Array.from(value || [])).every(file => file?.size <= 6 * 1024 * 1024)
+  )
+  .test("fileType", "Formats acceptés: JPEG, PNG", (value) =>
+    (Array.from(value || [])).every(file => ["image/jpeg", "image/png"].includes(file?.type))
+  )
+  .required("Les images sont obligatoires"),
 });
 
 const gouvernorats = [
@@ -100,32 +99,40 @@ export default function AnnonceForm() {
               Images ({previews.length}/3)
             </label>
             <div className="grid grid-cols-3 gap-2">
-              {previews.map((url, index) => (
-                <div key={index} className="relative group">
-                  <div className="relative aspect-square">
-                    <Image
-                      src={url}
-                      alt={`Preview ${index + 1}`}
-                      fill
-                      className="rounded-lg object-cover border dark:border-gray-700/50"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setPreviews(prev => prev.filter((_, i) => i !== index));
-                      setValue("images", (prevFiles) => {
-                        const updatedFiles = Array.from(prevFiles || []);
-                        updatedFiles.splice(index, 1);
-                        return updatedFiles.length > 0 ? updatedFiles : null;
-                      }, { shouldValidate: true });
-                    }}
-                    className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 
-                      transition-opacity hover:bg-red-600 dark:hover:bg-red-400"
-                  >
-                    <FaTimes size={12} />
-                  </button>
+            {previews.map((img, index) => (
+  <div key={index} className="relative group">
+    <div className="relative aspect-square">
+      <Image
+        src={img.url}
+
+                    alt={`Preview ${index + 1}`}
+                    fill
+                    className="rounded-lg object-cover border dark:border-gray-700/50"
+                  />
                 </div>
+              
+                {/* Taille du fichier */}
+                <div className="absolute bottom-1 left-1 bg-black/70 text-white text-xs px-2 py-0.5 rounded">
+                  {(img.file.size / (1024 * 1024)).toFixed(2)} MB
+                </div>
+              
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPreviews(prev => prev.filter((_, i) => i !== index));
+                    setValue("images", (prevFiles) => {
+                      const updatedFiles = Array.from(prevFiles || []);
+                      updatedFiles.splice(index, 1);
+                      return updatedFiles.length > 0 ? updatedFiles : null;
+                    }, { shouldValidate: true });
+                  }}
+                  className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 
+                    transition-opacity hover:bg-red-600 dark:hover:bg-red-400"
+                >
+                  <FaTimes size={12} />
+                </button>
+              </div>
+              
               ))}
 
               {previews.length < 3 && (
@@ -142,8 +149,12 @@ export default function AnnonceForm() {
                       
                       setPreviews(prev => [
                         ...prev, 
-                        ...newFiles.map(file => URL.createObjectURL(file))
+                        ...newFiles.map(file => ({
+                          url: URL.createObjectURL(file),
+                          file,
+                        }))
                       ]);
+                      
                       
                       setValue("images", [
                         ...(Array.from(e.target.files || [])),
@@ -272,7 +283,7 @@ export default function AnnonceForm() {
                 <FaSpinner className="animate-spin" />
                 Publication en cours...
               </div>
-            ) : "Publier l annonce"}
+            ) : "Publier l'annonce"}
           </motion.button>
         </form>
       </motion.div>

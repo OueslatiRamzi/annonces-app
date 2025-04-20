@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 "use client";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
@@ -11,7 +11,7 @@ export default function LoginPageContent() {
   const error = searchParams.get("error");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex items-start sm:items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10 dark:from-gray-900 dark:to-gray-800">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

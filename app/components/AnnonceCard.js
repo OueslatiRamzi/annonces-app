@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
+
 "use client";
 
 import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { FaTag, FaMapMarkerAlt } from "react-icons/fa"; // Retiré FaPhone inutilisé
+import { FaTag, FaUser, FaMapMarkerAlt } from "react-icons/fa"; 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
@@ -137,17 +137,16 @@ export default function AnnonceCard({ annonce }) {
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-2">
             <div className="relative w-8 h-8">
-              {annonce.user?.image && !imageError ? (
+            {annonce.user?.image ? (
                 <Image
                   src={annonce.user.image}
-                  alt={annonce.user.name}
+                  alt={`Avatar de ${annonce.user.name}`}
                   fill
-                  className="rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
-                  onError={() => setImageError(true)}
+                  className="rounded-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-blue-500 text-white rounded-full text-xs border-2 border-gray-200 dark:border-gray-600">
-                  {getInitials(annonce.user?.name)}
+                <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
+                  <FaUser className="text-gray-500 dark:text-gray-400" />
                 </div>
               )}
             </div>

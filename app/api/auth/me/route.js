@@ -3,28 +3,22 @@ import { authOptions } from "../[...nextauth]/route";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  try {
-    const session = await getServerSession(authOptions);
-    
-    if (!session?.user) {
-      return NextResponse.json(
-        { error: "Non authentifié" }, 
-        { status: 401 }
-      );
-    }
+  const session = await getServerSession(authOptions);
 
-    return NextResponse.json({
-      user: {
-        id: session.user.id,
-        name: session.user.name,
-        email: session.user.email
-      }
-    });
-
-  } catch {
+  // Pas d'utilisateur connecté ? On retourne une réponse "propre"
+  if (!session?.user) {
     return NextResponse.json(
-      { error: "Erreur serveur" },
-      { status: 500 }
+      { user: null }, // ou {} si tu préfères
+      { status: 200 } // pas une erreur, juste pas connecté
     );
   }
+
+  // Utilisateur connecté
+  return NextResponse.json({
+    user: {
+      id: session.user.id,
+      name: session.user.name,
+      email: session.user.email
+    }
+  });
 }

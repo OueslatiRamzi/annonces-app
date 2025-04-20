@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 'use client';
 import { motion } from 'framer-motion';
 import ContactForm from "../components/ContactForm";
